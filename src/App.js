@@ -4,7 +4,7 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
-import {v1 as uuid} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 import './App.css';
@@ -15,6 +15,10 @@ class App extends Component {
     todos: []
   };
 
+  // runs after the component is mounted.
+  // will be swithced to useEffect({})
+    // Using axios to fetch apis
+  // A promise is then retrieved and we can get the data from res (response)
   componentDidMount() {
     axios
       .get('https://jsonplaceholder.typicode.com/todos?_limit=10')
@@ -52,7 +56,7 @@ class App extends Component {
         completed: false
       })
       .then(res => {
-        res.data.id = uuid.v4();
+        res.data.id = uuidv4();
         this.setState({ todos: [...this.state.todos, res.data] });
       });
   };
